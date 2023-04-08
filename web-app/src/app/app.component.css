@@ -1,3 +1,5 @@
+@import 'material-icons/iconfont/material-icons.css';
+
 body {
     padding: 3rem 5rem;
     overflow-x: hidden;
@@ -50,6 +52,7 @@ ul {
     text-align: center;
     padding-top: 10px;
     box-sizing: border-box;
+    z-index: 2;
   }
 
   .barra-de-inicio ul {
