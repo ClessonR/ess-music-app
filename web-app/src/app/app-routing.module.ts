@@ -20,6 +20,7 @@ import { ArtistaAdminComponent } from './artista-admin/artista-admin.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumAdminComponent } from './album-admin/album-admin.component';
 import { AlbumCadastroComponent } from './album-cadastro/album-cadastro.component';
+import { PlaylistAdminComponent } from './playlist-admin/playlist-admin.component';
 // import { MusicasComponent } from './musicas/musicas.component';
 
 
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path: 'artistaAdmin', component: ArtistaAdminComponent},
   {path: 'album', component: AlbumComponent},
   {path: 'albumAdmin', component: AlbumAdminComponent},
-  {path: 'albumCadastro', component: AlbumCadastroComponent}
+  {path: 'albumCadastro', component: AlbumCadastroComponent},
+  {path: 'playlistAdmin', component: PlaylistAdminComponent}
 ];
 
 @NgModule({

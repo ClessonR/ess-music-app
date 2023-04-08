@@ -37,6 +37,7 @@ import { ArtistaAdminComponent } from './artista-admin/artista-admin.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumAdminComponent } from './album-admin/album-admin.component';
 import { AlbumCadastroComponent } from './album-cadastro/album-cadastro.component';
+import { PlaylistAdminComponent } from './playlist-admin/playlist-admin.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { AlbumCadastroComponent } from './album-cadastro/album-cadastro.componen
     ArtistaAdminComponent,
     AlbumComponent,
     AlbumAdminComponent,
-    AlbumCadastroComponent
+    AlbumCadastroComponent,
+    PlaylistAdminComponent
   ],
   imports: [
     BrowserModule,
