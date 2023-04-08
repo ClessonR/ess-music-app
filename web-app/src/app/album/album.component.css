@@ -76,4 +76,28 @@
   
 .informacoesAlbum{
     color: rgba(195, 195, 195, 0.7);
-}  
+}
+
+ul {
+  list-style: none;
+  padding: 8px 0;
+}
+
+li {
+  display: inline-block;
+  width: 205.99px;
+  padding: 8px 0;
+  background-color: rgba(137, 7, 198, 1);
+  border-radius: 12px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: white;
+    cursor: pointer;
+  } 
+
