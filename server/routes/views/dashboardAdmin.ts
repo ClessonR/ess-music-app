@@ -36,5 +36,5 @@ export const dashboardRoute = (req: Request, res: Response) => {
         res.send(userData)
 
     })*/
-    return res.status(200).send('Bem vindo ao dashboard')
+    return res.status(200).send('Bem vindo ao dashboard admin')
 }
