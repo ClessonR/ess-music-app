@@ -1,10 +1,64 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  constructor(private http: HttpClient) { }
+
+  apiurl = 'http://localhost:3000/user';
+
+  GetAll(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiurl);
+  }
+
+  GetbyCode(code: any): Observable<any> {
+    return this.http.get<any>(`${this.apiurl}/${code}`);
+  }
+
+  GetAllRole(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/role');
+  }
+
+  Proceedregister(inputdata: any): Observable<any> {
+    return this.http.post<any>(this.apiurl, inputdata);
+  }
+
+  Updateuser(code: any, inputdata: any): Observable<any> {
+    return this.http.put<any>(`${this.apiurl}/${code}`, inputdata);
+  }
+
+  Adduser(inputdata: any): Observable<any> {
+    return this.http.post<any>(this.apiurl, inputdata);
+  }
+
+  // Saber se o usuário está logado
+  IsloggedIn(): boolean {
+    return localStorage.getItem('username') !== null;
+  }
+
+  GetUserRole(): string {
+    return localStorage.getItem('userrole')?.toString() || '';
+  }
+
+  deletarUsuario(code: any) {
+    this.http.delete(this.apiurl + '/' + code).subscribe(res => res)
+  }
+}
+
+/*Antes da refatoração, caso quebre algo
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  constructor(private http: HttpClient) { }
+
   constructor(private http: HttpClient) { }
 
   apiurl = 'http://localhost:3000/user'
@@ -13,7 +67,7 @@ export class AuthService {
     return this.http.get(this.apiurl);
   }
 
-  Getbycode(code: any) {
+  GetbyCode(code: any) {
     return this.http.get(this.apiurl + '/' + code);
   }
 
@@ -38,7 +92,7 @@ export class AuthService {
     return sessionStorage.getItem('username') != null;
   }
 
-  GetUserrole() {
+  GetUserRole() {
     return sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole')?.toString() : '';
   }
 
@@ -47,3 +101,4 @@ export class AuthService {
   }
 
 }
+*/

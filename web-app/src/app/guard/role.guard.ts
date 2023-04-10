@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from '../service/auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +10,8 @@ export class RoleGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router) { }
 
     canActivate(): boolean {
-        const userRole = this.authService.getUserRole();
-        console.log(userRole)
+        const userRole: string = this.authService.GetUserRole() ?? "";
+        console.log(userRole);
         if (userRole === 'admin') {
             return true;
         } else {
@@ -19,5 +19,7 @@ export class RoleGuard implements CanActivate {
             return false;
         }
     }
+
+}
 
 }
