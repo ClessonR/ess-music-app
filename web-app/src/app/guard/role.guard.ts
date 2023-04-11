@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +10,8 @@ export class RoleGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router) { }
 
     canActivate(): boolean {
-        const userRole: string = this.authService.GetUserRole() ?? "";
-        console.log(userRole);
+        const userRole = this.authService.getUserRole();
+        console.log(userRole)
         if (userRole === 'admin') {
             return true;
         } else {

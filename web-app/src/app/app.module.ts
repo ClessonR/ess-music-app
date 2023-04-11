@@ -41,11 +41,11 @@ import { CadastraAlbumComponent } from './cadastra-album/cadastra-album.componen
 import { VisualizacaoAdminArtistasComponent } from './visualizacao-admin-artistas/visualizacao-admin-artistas.component';
 import { CadastraAlbumService } from './cadastra-album/cadastra-album.service';
 import { PlaylistAdminComponent } from './playlist-admin/playlist-admin.component';
-import { EditaMusicaComponent } from './edita-musica/edita-musica.component';
-import { EditaAlbumComponent } from './edita-album/edita-album.component';
 import { PlaylistsCategoriaComponent } from './playlists-categoria/playlists-categoria.component';
 import { PlaylistsCategoriaAdminComponent } from './playlists-categoria-admin/playlists-categoria-admin.component';
 import { BibliotecaUsuarioComponent } from './biblioteca-usuario/biblioteca-usuario.component';
+import { EditaMusicaComponent } from './edita-musica/edita-musica.component';
+import { EditaAlbumComponent } from './edita-album/edita-album.component';
 import { CadastraPlaylistComponent } from './cadastra-playlist/cadastra-playlist.component';
 import { EditaArtistaComponent } from './edita-artista/edita-artista.component';
 import { ResultadosPesquisaComponent } from './resultados-pesquisa/resultados-pesquisa.component';
@@ -85,7 +85,6 @@ import { SelecionarPlaylistComponent } from './selecionar-playlist/selecionar-pl
     PlaylistAdminComponent,
     EditaMusicaComponent,
     EditaAlbumComponent,
-    PlaylistsCategoriaComponent,
     PlaylistsCategoriaAdminComponent,
     BibliotecaUsuarioComponent,
     CadastraPlaylistComponent,

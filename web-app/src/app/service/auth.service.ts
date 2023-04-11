@@ -59,15 +59,13 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) { }
-
   apiurl = 'http://localhost:3000/user'
 
   GetAll() {
     return this.http.get(this.apiurl);
   }
 
-  GetbyCode(code: any) {
+  Getbycode(code: any) {
     return this.http.get(this.apiurl + '/' + code);
   }
 
@@ -76,12 +74,17 @@ export class AuthService {
   }
 
   Proceedregister(inputdata: any) {
+  Proceedregister(inputdata: any) {
     return this.http.post(this.apiurl, inputdata);
   }
 
   Updateuser(code: any, inputdata: any) {
     return this.http.put(this.apiurl + '/' + code, inputdata);
+  Updateuser(code: any, inputdata: any) {
+    return this.http.put(this.apiurl + '/' + code, inputdata);
   }
+
+  Adduser(inputdata: any) {
 
   Adduser(inputdata: any) {
     return this.http.post(this.apiurl, inputdata);
@@ -91,11 +94,17 @@ export class AuthService {
   IsloggedIn() {
     return sessionStorage.getItem('username') != null;
   }
+  IsloggedIn() {
+    return sessionStorage.getItem('username') != null;
+  }
 
-  GetUserRole() {
+  GetUserrole() {
     return sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole')?.toString() : '';
   }
 
+  deletarUsuario(code: any) {
+    this.http.delete(this.apiurl + '/' + code).subscribe(res => res)
+  }
   deletarUsuario(code: any) {
     this.http.delete(this.apiurl + '/' + code).subscribe(res => res)
   }

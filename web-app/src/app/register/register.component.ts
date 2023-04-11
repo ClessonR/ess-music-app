@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'
 import { AuthService } from '../service/auth.service';
 import * as bcrypt from 'bcryptjs';
 import { Subscription } from 'rxjs';
@@ -13,54 +14,37 @@ import { Subscription } from 'rxjs';
 })
 export class RegisterComponent {
 
-  constructor(
-    private builder: FormBuilder,
-    private toastr: ToastrService,
-    private service: AuthService,
-    private router: Router
-  ) { }
+  constructor(private builder: FormBuilder, private toastr: ToastrService, private service: AuthService, private router: Router) {
 
-  registerForm = this.builder.group({
-    id: ['', Validators.required],
-    name: ['', Validators.required],
-    password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-    email: ['', Validators.compose([Validators.required, Validators.email])],
-    role: ['user'],
-    isactive: [true]
+
+  }
+
+  registerform = this.builder.group({
+    name: this.builder.control('', Validators.required),
+    email: this.builder.control('', Validators.compose([Validators.required, Validators.email])),
+    password: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(6)]))
   });
 
-  userlist: any;
-  subscription: Subscription = new Subscription();
+  async proceedregistration() {
+    const username = (document.querySelector('#username') as HTMLInputElement).value;
+    const email = (document.querySelector('#email') as HTMLInputElement).value;
+    const password = (document.querySelector('#password') as HTMLInputElement).value;
 
-  async proceedRegistration() {
+    const response = await fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: username, email: email, password: password })
+    });
 
-    // Registro com sucesso
-    if (this.registerForm.valid) {
-      this.subscription.add(this.service.GetAll().subscribe(async res => {
-        this.userlist = res;
-
-        const emailRegistered = this.isEmailRegistered(this.userlist, this.registerForm.value.email ?? '');
-
-        if (!emailRegistered) {
-          try {
-            this.registerForm.value.password = await bcrypt.hash(this.registerForm.value.password ?? '', 10);
-            this.subscription.add(this.service.Proceedregister(this.registerForm.value).subscribe(() => {
-              this.toastr.success('Registro feito com sucesso!');
-              this.router.navigate(['login']);
-            }));
-          } catch (error) {
-            this.toastr.error('Erro ao criar o hash da senha!');
-            console.error('Erro ao criar o hash da senha:', error);
-          }
-        } else {
-          this.toastr.warning('E-mail já cadastrado.');
-          console.log('E-mail já cadastrado.');
-        }
-      }));
-    }
-    // Falha no registro
-    else {
-      this.toastr.warning('Por favor, colocar um dado válido!');
+    if (response.ok) {
+      const result = await response.text();
+      console.log(result);
+      this.router.navigate(['login'])
+    } else {
+      const error = await response.text();
+      console.log(error);
     }
   }
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ResultadosPesquisaService } from '../resultados-pesquisa/resultados-pesquisa.service';
 
 @Component({
   selector: 'app-playlist-seguida',
@@ -7,9 +6,5 @@ import { ResultadosPesquisaService } from '../resultados-pesquisa/resultados-pes
   styleUrls: ['./playlist-seguida.component.css']
 })
 export class PlaylistSeguidaComponent {
-  constructor(private resultados: ResultadosPesquisaService){}
 
-  pesquisar(){
-    this.resultados.pesquisar()
-  }
 }
