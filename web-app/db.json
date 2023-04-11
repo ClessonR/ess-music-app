@@ -153,38 +153,38 @@
   "artistas": [
     {
       "nome": "Rihanna",
-      "genero_musical": "Pop music",
-      "categoria": "https://lastfm.freetls.fastly.net/i/u/770x0/fcb5c35b5ab6fe90565b8647b607ed99.jpg#fcb5c35b5ab6fe90565b8647b607ed99",
+      "categoria": "Pop music",
+      "url_foto_artista": "https://lastfm.freetls.fastly.net/i/u/770x0/fcb5c35b5ab6fe90565b8647b607ed99.jpg#fcb5c35b5ab6fe90565b8647b607ed99",
       "id": 2
     },
     {
       "nome": "Taylor Swift",
-      "genero_musical": "Country",
-      "categoria": "https://lastfm.freetls.fastly.net/i/u/770x0/d651025ce0f11bfdba128f44f1d2e370.jpg#d651025ce0f11bfdba128f44f1d2e370",
+      "categoria": "Country",
+      "url_foto_artista": "https://lastfm.freetls.fastly.net/i/u/770x0/d651025ce0f11bfdba128f44f1d2e370.jpg#d651025ce0f11bfdba128f44f1d2e370",
       "id": 3
     },
     {
       "nome": "Doja Cat",
-      "genero_musical": "Pop music",
-      "categoria": "https://www.deezer-blog.com/assets/sites/8/2021/12/doja-cat.jpg",
+      "categoria": "Pop music",
+      "url_foto_artista": "https://www.deezer-blog.com/assets/sites/8/2021/12/doja-cat.jpg",
       "id": 4
     },
     {
       "id": 5,
       "nome": "Arctic Monkeys",
-      "genero_musical": "Indie Rock",
+      "categoria": "Indie Rock",
       "url_foto_artista": "https://lastfm.freetls.fastly.net/i/u/770x0/2cc82f42b8d2ee5f67b8520153f07033.jpg#2cc82f42b8d2ee5f67b8520153f07033"
     },
     {
       "id": 6,
       "nome": "Troye Sivan",
-      "genero_musical": "Pop",
+      "categoria": "Pop",
       "url_foto_artista": "https://lastfm.freetls.fastly.net/i/u/770x0/fade00902b809244fd145a01e096002b.jpg#fade00902b809244fd145a01e096002b"
     },
     {
       "id": 7,
       "nome": "Ariana Grande",
-      "genero_musical": "Pop",
+      "categoria": "Pop",
       "url_foto_artista": "https://lastfm.freetls.fastly.net/i/u/avatar170s/6b02b78c1a6f34a27a0a6f39a1739f6b"
     }
   ],

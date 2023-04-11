@@ -29,14 +29,14 @@
         <tbody>            
             <tr class="cor-diferente" *ngFor="let artista of artistas">
                 <td class="album-capa">
-                    <img src="{{artista.categoria}}" alt="">
+                    <img src="{{artista.url_foto_artista}}" alt="">
                 </td>
                 <td>
                     <p>{{artista.nome}}</p> 
                 </td>
-                <td>{{artista.genero_musical}}</td>
+                <td>{{artista.categoria}}</td>
                 <td><a [routerLink]="[artista.id, 'cadastrar-album']"><button>Cadastrar Novo Album</button></a></td>
-                <td><a [routerLink]="[artista.id, artista.nome, artista.genero_musical, artista.categoria, 'artistaAdmin']"><button>Visualizar Artista</button></a></td>
+                <td><a [routerLink]="[artista.id, artista.nome, artista.url_foto_artista, artista.categoria, 'artistaAdmin']"><button>Visualizar Artista</button></a></td>
             </tr>
         </tbody>
       </table>

@@ -1,6 +1,7 @@
 import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
+import { ResultadosPesquisaService } from './resultados-pesquisa/resultados-pesquisa.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,8 @@ export class AppComponent implements DoCheck {
   ismenurequired = false;
   isadminuser = false;
   isuser = true;
-  constructor(private router: Router, private service: AuthService) {
 
-  }
+  constructor(private router: Router, private service: AuthService, private resultados: ResultadosPesquisaService) {}
   ngDoCheck(): void {
     let currenturl = this.router.url;
     if (currenturl == '/login' || currenturl == '/register' || currenturl == '/') {
@@ -29,5 +29,9 @@ export class AppComponent implements DoCheck {
       this.isadminuser = false;
       this.isuser = true;
     }
+  }
+
+  pesquisar(){
+    this.resultados.pesquisar()
   }
 }
