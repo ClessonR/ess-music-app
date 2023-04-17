@@ -3,6 +3,8 @@ import { Playlist } from '../playlist-admin/playlist';
 import { ActivatedRoute } from '@angular/router';
 import { PlaylistService } from '../playlist-admin/playlist.service';
 import { HttpClient } from '@angular/common/http';
+import { Categoria } from '../criar-categoria/categoria';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-playlist',
@@ -17,8 +19,10 @@ export class EditarPlaylistComponent {
   constructor(
     private route: ActivatedRoute,
     private playlistService: PlaylistService,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) {}
+  categorias: Categoria[] = [];
 
 
   ngOnInit() {
@@ -26,6 +30,14 @@ export class EditarPlaylistComponent {
     this.playlistService.getPlaylistById(String(this.id)).subscribe(playlist => {
       this.playlist = playlist;
     });
+    this.http.get<any[]>('http://localhost:3000/categorias').subscribe(
+      (categorias) => {
+        this.categorias = categorias;
+      },
+      (error) => {
+        console.error('Erro ao carregar categorias:', error);
+      }
+    );
   }
 
   editarPlaylist() {
@@ -33,13 +45,25 @@ export class EditarPlaylistComponent {
     const novaPrivacidade = (<HTMLInputElement>document.getElementById("playlist-privacidade")).value;
     const novaUrl = (<HTMLInputElement>document.getElementById("playlist-url_foto_playlist")).value;
 
+    if(
+      novoTitulo == '' ||
+      novaUrl == '' ||
+      novaPrivacidade == ''
+    ){
+      this.toastr.error('Campo inválido!');
+      return;
+    }
+
     this.http.put(this.taURL + "/playlists/" + String(this.id),
     { titulo: novoTitulo || this.playlist.titulo,
       privacidade: novaPrivacidade || this.playlist.privacidade,
       url_foto_playlist: novaUrl || this.playlist.url_foto_playlist
     }).subscribe(() => {
+      this.toastr.success('Playlist atualizada!');
       console.log('Título atualizado com sucesso!');
-      window.history.back();
+      setTimeout(() => {
+        window.history.back();
+      }, 3000);
     }, (error) => {
       console.error('Ocorreu um erro ao atualizar o título da música:', error);
     });

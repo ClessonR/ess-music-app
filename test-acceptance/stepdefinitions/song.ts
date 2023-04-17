@@ -2,25 +2,75 @@ import { defineSupportCode } from 'cucumber';
 import { browser, $, element, ElementArrayFinder, by, ExpectedConditions } from 'protractor';
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
-import request = require("request-promise");
 
 const base_url = "http://localhost:3000/";
 const base_front_url = "http://localhost:4200";
 
-async function loginAsUser(user_id: string, password: string){
-    //Navegar até página de login
-    await browser.get(base_front_url);
-    await element(by.buttonText('Login')).click();
-    await expect(browser.getCurrentUrl()).to.eventually.equal(base_front_url + '/login');
-
-    //Realizar login
-    await $("input[formControlName='username']").sendKeys(<string> user_id);
-    await $("input[formControlName='password']").sendKeys(<string> password);
-    await element(by.buttonText('Login')).click();
-    await browser.wait(ExpectedConditions.urlIs(base_front_url + "/initial-page") , 30000);
-    await expect(browser.getCurrentUrl()).to.eventually.equal(base_front_url + "/initial-page");
-}
-
 defineSupportCode(function ({ Given, When, Then }){
-    
+    Given(/^Estou na página do álbum "([^\"]*)" do artista "([^\"]*)"$/, {timeout: 30000}, async (album: string, artist: string) => {
+        await browser.executeScript("document.body.style.zoom='80%'");
+
+        await element(by.cssContainingText('a', 'Visualizar Artistas')).click();
+
+        await expect(browser.getCurrentUrl()).to.eventually.equal(base_front_url + "/visualizar-artistas-admin");
+
+        await element(by.cssContainingText('td p', artist))
+            .element(by.xpath('..'))
+            .element(by.xpath('..'))
+            .element(by.buttonText('Visualizar Artista'))
+            .click();
+
+        await expect(browser.getCurrentUrl()).to.eventually.include(base_front_url + "/visualizar-artistas-admin/");
+
+        await browser.executeScript('window.scrollTo(0,document.body.scrollHeight);');
+
+        const elm = $("#tabelaAlbum")
+            .element(by.cssContainingText('td', album));
+
+        await elm.click();
+
+        await expect(browser.getCurrentUrl()).to.eventually.include(base_front_url + "/albumAdmin/");
+    })
+
+    When(/^Clico em "Cadastrar Musicas"$/, async () => {
+        await element(by.buttonText("Cadastrar Musicas")).click();
+
+        await expect(browser.getCurrentUrl()).to.eventually.include(base_front_url + "/albumAdmin/");
+        await expect(browser.getCurrentUrl()).to.eventually.include("/cadastrar-musica");
+    })
+
+    When(/^Clico em "Editar informações" na música "([^\"]*)"$/, {timeout: 30000}, async (song:string) => {
+        // await element(by.cssContainingText('td p', song))
+        //     .element(by.xpath('..'))
+        //     .element(by.xpath('..'))
+        //     .element(by.cssContainingText('li', 'Editar informações'))
+        //     .click();
+
+        const btn = element(by.cssContainingText('td p', song))
+            .element(by.xpath('..'))
+            .element(by.xpath('..'))
+            .element(by.css('button.dropbtn'));
+
+
+        // await browser.driver.executeScript('window.scrollTo(0,document.body.scrollHeight);').then(() => {});
+        await browser.driver.executeScript('window.scrollTo(0,0);');
+        await browser.executeScript("document.body.style.zoom='80%'");
+
+        await browser.wait(() => false, 2000).catch(() => {});
+
+        await browser.waitForAngular();
+        await browser.actions().mouseMove(btn).perform();
+        
+        await btn
+            .element(by.xpath('..'))
+            .element(by.cssContainingText('li', 'Editar informações'))
+            .click();
+
+        await expect(browser.getCurrentUrl()).to.eventually.include(base_front_url + "/editar-musica/");
+    })
+
+    When(/^Preencho o campo de "Nome da Música" com "([^\"]*)"$/, async (name) => {
+        await $("#musica-titulo").clear();
+        await $("#musica-titulo").sendKeys(<string> name);
+    })
 })
